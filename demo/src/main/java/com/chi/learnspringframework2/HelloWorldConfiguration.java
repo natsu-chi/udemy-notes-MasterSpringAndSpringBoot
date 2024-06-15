@@ -1,5 +1,6 @@
-package com.chi.learnspringframework;
+package com.chi.learnspringframework2;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 /* 
@@ -8,11 +9,14 @@ import org.springframework.context.annotation.Configuration;
  * @Configuration classes declare beans through @Bean-annotated methods. 
  * Calls to @Bean methods on @Configuration classes can also be used to define inter-bean dependencies.
  */
+import org.springframework.context.annotation.Primary;
 
 record Person(String name, int age) { };
 record PersonWithAddress(String name, int age, Address address) { };
 record Address(String street, String city) { };
 record Education(String major, String school) { };
+record PersonWithQualifier(String name, int age, Address address, Education education) { };
+
 
 @Configuration
 public class HelloWorldConfiguration {
@@ -53,13 +57,20 @@ public class HelloWorldConfiguration {
   }
 
   @Bean
+  @Primary
   public Education education() {
     return new Education("Marketing", "Northwestern University");
   }
 
   @Bean
+  @Qualifier("educationqualified")
   public Education education2() {
     return new Education("Science", "TU Berlin");
+  }
+
+  @Bean
+  public PersonWithQualifier person4WithQualifier(String name, int age, Address address, @Qualifier("educationqualified") Education education) {
+    return new PersonWithQualifier(name, age, address, education);
   }
 
 }
