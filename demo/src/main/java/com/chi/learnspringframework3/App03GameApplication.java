@@ -3,16 +3,13 @@ package com.chi.learnspringframework3;
 import com.chi.learnspringframework.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import java.util.Arrays;
 
+@ComponentScan("com.chi.learnspringframework")
 @Configuration
-class GamingConfiguration {
-    @Bean
-    public GamingConsole game() {
-        var game = new PacmanGame();
-        return game;
-    }
+public class App03GameApplication {
 
     @Bean
     public GameRunner gameRunner(GamingConsole game) {
@@ -20,13 +17,10 @@ class GamingConfiguration {
         return gameRunner;
     }
 
-}
-
-public class App03GameApplication {
     public static void main(String[] args) {
 
         /* Dependency Injection version */
-        try (var context = new AnnotationConfigApplicationContext(GamingConfiguration.class)) {
+        try (var context = new AnnotationConfigApplicationContext(App03GameApplication.class)) {
             Arrays.stream(context.getBeanDefinitionNames())
                     .forEach(System.out::println);
 

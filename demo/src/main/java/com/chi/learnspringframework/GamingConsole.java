@@ -1,5 +1,8 @@
 package com.chi.learnspringframework;
 
+import org.springframework.stereotype.Component;
+
+//@Component
 public interface GamingConsole {
     public void up();
     public void down();
