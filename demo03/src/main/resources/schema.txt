@@ -1,0 +1,6 @@
+create table word (
+    id bigint not null,
+    word varchar(100),
+    meaning varchar(500),
+    primary key (id)
+);
