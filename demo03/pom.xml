@@ -68,9 +68,15 @@
 			<version>2.3.0</version>
 		</dependency>
 
+		<!-- HATEOAS -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-hateoas</artifactId>
+		</dependency>
+		<!-- HAL Explorer -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-rest-hal-explorer</artifactId>
 		</dependency>
 
 		<!--  Jackson JSON 處理庫的擴展模組 -->
@@ -78,6 +84,12 @@
 		<!--  	<groupId>com.fasterxml.jackson.dataformat</groupId>-->
 		<!--  	<artifactId>jackson-dataformat-xml</artifactId>-->
 		<!--  </dependency>-->
+
+		<!-- Actuator -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
 
 		<!-- CSS & JS -->
 		<dependency>
