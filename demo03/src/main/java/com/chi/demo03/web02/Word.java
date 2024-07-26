@@ -1,29 +1,29 @@
 package com.chi.demo03.web02;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Word {
     @Id
-    @GeneratedValue
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Size(min = 2, max = 100)
     private String word;
+    @Size(min = 2, max = 300)
     private String meaning;
 
-    public Word() {}
-    public Word(long id, String word, String meaning) {
-        this.id = id;
-        this.word = word;
-        this.meaning = meaning;
-    }
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "userId")
+    private User user;
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -41,5 +41,13 @@ public class Word {
 
     public void setMeaning(String meaning) {
         this.meaning = meaning;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
