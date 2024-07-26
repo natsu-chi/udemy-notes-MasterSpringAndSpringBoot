@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 public class Word {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -14,9 +15,9 @@ public class Word {
     @Size(min = 2, max = 300)
     private String meaning;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Integer getId() {

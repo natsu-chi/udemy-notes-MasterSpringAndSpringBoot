@@ -1,5 +1,6 @@
 package com.chi.demo03.web02;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
@@ -21,6 +22,7 @@ public class User {
     private LocalDate birthDate;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Word> words;
 
     public User() { }

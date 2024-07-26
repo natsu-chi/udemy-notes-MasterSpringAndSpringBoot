@@ -20,11 +20,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class UserResourceJpa {
 
     private UserRepository repository;
-    private PostRepository postRepository;
+    private WordRepository wordRepository;
 
-    public UserResourceJpa(UserRepository repository, PostRepository postRepository) {
+    public UserResourceJpa(UserRepository repository, WordRepository wordRepository) {
         this.repository = repository;
-        this.postRepository = postRepository;
+        this.wordRepository = wordRepository;
     }
 
     @GetMapping("/users/jpa/list")
@@ -65,12 +65,30 @@ public class UserResourceJpa {
     }
 
     @GetMapping("users/jpa/{userId}/words")
-    public List<Word> retrieveWordsByUserId(Integer userId) {
+    public List<Word> retrieveWordsByUserId(@PathVariable Integer userId) {
         Optional<User> user = repository.findById(userId);
         if(user.isEmpty()) {
             throw new UserNotFoundException("user_id: " + userId);
         }
         return user.get().getWords();
+    }
+
+    @PostMapping("users/jpa/{userId}/words")
+    public ResponseEntity<Object> createWordByUserId(@PathVariable int userId, @Valid @RequestBody Word word) {
+        Optional<User> user = repository.findById(userId);
+        if(user.isEmpty()) {
+            throw new UserNotFoundException("user_id: " + userId);
+        }
+
+        word.setUser(user.get());
+        Word savedWord = wordRepository.save(word);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                        .path("/{id}")
+                        .buildAndExpand(savedWord.getId())
+                        .toUri();
+        // 讓客戶端就可以知道新創建的資源的位置並可以直接訪問它
+        return ResponseEntity.created(location).build();
     }
     
 }
