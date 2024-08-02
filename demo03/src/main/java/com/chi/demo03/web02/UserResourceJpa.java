@@ -2,7 +2,6 @@ package com.chi.demo03.web02;
 
 import com.chi.demo03.web01.user.UserNotFoundException;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +15,7 @@ import java.util.Optional;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+
 @RestController
 public class UserResourceJpa {
 
@@ -26,6 +26,11 @@ public class UserResourceJpa {
         this.repository = repository;
         this.wordRepository = wordRepository;
     }
+
+    @GetMapping("/basicauth")
+    public String basicAuthCheck() {
+		return "Success"; 
+	}
 
     @GetMapping("/users/jpa/list")
     public List<User> retrieveAll() {
