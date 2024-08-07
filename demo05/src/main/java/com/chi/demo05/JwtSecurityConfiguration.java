@@ -36,7 +36,7 @@ import java.security.KeyPairGenerator;
 import java.security.interfaces.RSAPublicKey;
 import java.util.UUID;
 
-@Configuration
+// @Configuration
 public class JwtSecurityConfiguration {
     
     @Bean
