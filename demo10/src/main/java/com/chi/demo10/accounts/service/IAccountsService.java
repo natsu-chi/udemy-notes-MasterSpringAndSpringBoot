@@ -2,7 +2,7 @@ package com.chi.demo10.accounts.service;
 
 import com.chi.demo10.accounts.dto.CustomerDto;
 
-public interface IAccountService {
+public interface IAccountsService {
 
     /**
      * 

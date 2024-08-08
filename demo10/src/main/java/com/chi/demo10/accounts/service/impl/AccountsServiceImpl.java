@@ -1,6 +1,6 @@
 package com.chi.demo10.accounts.service.impl;
 
-import java.lang.classfile.ClassFile.Option;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
 
@@ -15,7 +15,7 @@ import com.chi.demo10.accounts.mapper.AccountsMapper;
 import com.chi.demo10.accounts.mapper.CustomerMapper;
 import com.chi.demo10.accounts.repository.AccountsRepository;
 import com.chi.demo10.accounts.repository.CustomerRepository;
-import com.chi.demo10.accounts.service.IAccountService;
+import com.chi.demo10.accounts.service.IAccountsService;
 import com.chi.demo10.exceptions.CustomerAlreadyExistException;
 import com.chi.demo10.exceptions.ResourceNotFoundException;
 
@@ -25,7 +25,7 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class AccountServiceImpl implements IAccountService {
+public class AccountsServiceImpl implements IAccountsService {
     
     private AccountsRepository accountsRepository;
     private CustomerRepository customerRepository;
@@ -40,7 +40,8 @@ public class AccountServiceImpl implements IAccountService {
         if(optionalCustomer.isPresent()) {
             throw new CustomerAlreadyExistException("Customer already registered with given mobile " + customerDto.getMobile());
         }
-
+        customer.setCreateTime(LocalDateTime.now());
+        customer.setCreateUser("Anonymous");
         Customer savedCustomer = customerRepository.save(customer);
         accountsRepository.save(createNewAccount(savedCustomer));
     }
@@ -72,7 +73,7 @@ public class AccountServiceImpl implements IAccountService {
         );
 
         Accounts accounts = accountsRepository.findByCustomerId(customer.getCustomerId()).orElseThrow(
-            () -> new ResourceNotFoundException("Account", "CustomerId", customer.getCustomerId().toString())
+            () -> new ResourceNotFoundException("Account", "customerId", customer.getCustomerId().toString())
         );
 
         CustomerDto customerDto = CustomerMapper.mapToCustomerDto(customer, new CustomerDto());
@@ -83,6 +84,7 @@ public class AccountServiceImpl implements IAccountService {
 
     @Override
     public boolean updateAccount(CustomerDto customerDto) {
+
         boolean isUpdated = false;
         AccountsDto accountsDto = customerDto.getAccountsDto();
         if(accountsDto != null) {
@@ -91,14 +93,35 @@ public class AccountServiceImpl implements IAccountService {
             );
             AccountsMapper.mapToAccounts(accountsDto, accounts);
             accounts = accountsRepository.save(accounts);
+
+            Long customerId = customerDto.getCustomerId();
+            Customer customer = customerRepository.findById(customerId).orElseThrow(
+                () -> new ResourceNotFoundException("Customer", "CustomerId", customerId.toString())
+            );
+            CustomerMapper.mapToCustomer(customerDto, customer);
+            customerRepository.save(customer);
+
+            isUpdated = true;
         }
-        throw new UnsupportedOperationException(" Unimplemented method 'updateAccount'");
+        return isUpdated;
+
     }
 
     @Override
     public boolean deleteAccount(String mobile) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteAccount'");
+        
+        Customer customer = customerRepository.findByMobile(mobile).orElseThrow(
+            () -> new ResourceNotFoundException("Customer", "mobile", mobile)
+        );
+
+        if(customer != null) {
+            accountsRepository.deleteByCustomerId(customer.getCustomerId());
+            customerRepository.deleteById(customer.getCustomerId());
+            return true;
+        }
+
+        return false;
+
     }
     
 }

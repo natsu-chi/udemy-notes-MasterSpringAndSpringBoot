@@ -1,7 +1,5 @@
 package com.chi.demo10.accounts.entity;
 
-import java.time.LocalDate;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +9,7 @@ import lombok.ToString;
 
 @Entity
 @Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
-public class Customer {
+public class Customer extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +18,7 @@ public class Customer {
 
     private String name;
 
-    private LocalDate email;
+    private String email;
 
     private String mobile;
 
