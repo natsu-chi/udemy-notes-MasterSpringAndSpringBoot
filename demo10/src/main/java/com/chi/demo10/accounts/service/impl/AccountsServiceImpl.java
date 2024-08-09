@@ -1,6 +1,5 @@
 package com.chi.demo10.accounts.service.impl;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
 
@@ -16,8 +15,8 @@ import com.chi.demo10.accounts.mapper.CustomerMapper;
 import com.chi.demo10.accounts.repository.AccountsRepository;
 import com.chi.demo10.accounts.repository.CustomerRepository;
 import com.chi.demo10.accounts.service.IAccountsService;
-import com.chi.demo10.exceptions.CustomerAlreadyExistException;
-import com.chi.demo10.exceptions.ResourceNotFoundException;
+import com.chi.demo10.accounts.exceptions.CustomerAlreadyExistException;
+import com.chi.demo10.accounts.exceptions.ResourceNotFoundException;
 
 import lombok.AllArgsConstructor;
 
@@ -40,8 +39,8 @@ public class AccountsServiceImpl implements IAccountsService {
         if(optionalCustomer.isPresent()) {
             throw new CustomerAlreadyExistException("Customer already registered with given mobile " + customerDto.getMobile());
         }
-        customer.setCreateTime(LocalDateTime.now());
-        customer.setCreateUser("Anonymous");
+        // customer.setCreateTime(LocalDateTime.now());
+        // customer.setCreateUser("Anonymous");
         Customer savedCustomer = customerRepository.save(customer);
         accountsRepository.save(createNewAccount(savedCustomer));
     }
