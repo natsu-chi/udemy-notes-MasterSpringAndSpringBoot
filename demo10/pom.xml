@@ -23,6 +23,7 @@
 	</developers>
 	<modules>
 		<module>accounts</module>
+		<module>loans</module>
 	</modules>
 	<scm>
 		<connection/>

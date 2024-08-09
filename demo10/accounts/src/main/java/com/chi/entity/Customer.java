@@ -1,4 +1,4 @@
-package com.chi.demo10.accounts.entity;
+package com.chi.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,19 +9,17 @@ import lombok.ToString;
 
 @Entity
 @Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
-public class Accounts extends BaseEntity {
-    
+public class Customer extends BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
     private Long customerId;
 
-    @Id
-    @Column(name = "account_number")
-    private Long accountNumber;
+    private String name;
 
-    @Column(name="account_type")
-    private String accountType;
+    private String email;
 
-    @Column(name = "branch_address")
-    private String branchAddress;
+    private String mobile;
 
 }

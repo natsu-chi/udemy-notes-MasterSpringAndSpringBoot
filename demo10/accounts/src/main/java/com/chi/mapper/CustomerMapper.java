@@ -1,7 +1,7 @@
-package com.chi.demo10.accounts.mapper;
+package com.chi.mapper;
 
-import com.chi.demo10.accounts.dto.CustomerDto;
-import com.chi.demo10.accounts.entity.Customer;
+import com.chi.dto.CustomerDto;
+import com.chi.entity.Customer;
 
 public class CustomerMapper {
 

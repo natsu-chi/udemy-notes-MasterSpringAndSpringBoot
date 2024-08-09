@@ -1,10 +1,15 @@
-package com.chi.demo10.accounts.dto;
+package com.chi.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
+@Schema(
+    name = "Accounts",
+    description = "Schema to hold Account information"
+)
 public class AccountsDto {
     
     private Long customerId;

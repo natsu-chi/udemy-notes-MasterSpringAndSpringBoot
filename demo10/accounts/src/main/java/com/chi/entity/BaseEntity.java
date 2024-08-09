@@ -1,4 +1,4 @@
-package com.chi.demo10.accounts.entity;
+package com.chi.entity;
 
 import java.time.LocalDateTime;
 

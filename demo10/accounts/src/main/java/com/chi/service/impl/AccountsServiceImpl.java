@@ -1,22 +1,22 @@
-package com.chi.demo10.accounts.service.impl;
+package com.chi.service.impl;
 
 import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.stereotype.Service;
 
-import com.chi.demo10.accounts.constants.AccountsConstants;
-import com.chi.demo10.accounts.dto.AccountsDto;
-import com.chi.demo10.accounts.dto.CustomerDto;
-import com.chi.demo10.accounts.entity.Accounts;
-import com.chi.demo10.accounts.entity.Customer;
-import com.chi.demo10.accounts.mapper.AccountsMapper;
-import com.chi.demo10.accounts.mapper.CustomerMapper;
-import com.chi.demo10.accounts.repository.AccountsRepository;
-import com.chi.demo10.accounts.repository.CustomerRepository;
-import com.chi.demo10.accounts.service.IAccountsService;
-import com.chi.demo10.accounts.exceptions.CustomerAlreadyExistException;
-import com.chi.demo10.accounts.exceptions.ResourceNotFoundException;
+import com.chi.constants.AccountsConstants;
+import com.chi.dto.AccountsDto;
+import com.chi.dto.CustomerDto;
+import com.chi.entity.Accounts;
+import com.chi.entity.Customer;
+import com.chi.mapper.AccountsMapper;
+import com.chi.mapper.CustomerMapper;
+import com.chi.repository.AccountsRepository;
+import com.chi.repository.CustomerRepository;
+import com.chi.service.IAccountsService;
+import com.chi.exceptions.CustomerAlreadyExistException;
+import com.chi.exceptions.ResourceNotFoundException;
 
 import lombok.AllArgsConstructor;
 

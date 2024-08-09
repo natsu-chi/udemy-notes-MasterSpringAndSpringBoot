@@ -1,6 +1,6 @@
-package com.chi.demo10.accounts.service;
+package com.chi.service;
 
-import com.chi.demo10.accounts.dto.CustomerDto;
+import com.chi.dto.CustomerDto;
 
 public interface IAccountsService {
 

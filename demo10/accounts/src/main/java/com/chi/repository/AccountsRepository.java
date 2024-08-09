@@ -1,11 +1,11 @@
-package com.chi.demo10.accounts.repository;
+package com.chi.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 
-import com.chi.demo10.accounts.entity.Accounts;
+import com.chi.entity.Accounts;
 
 import jakarta.transaction.Transactional;
 

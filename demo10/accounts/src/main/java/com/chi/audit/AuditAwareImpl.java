@@ -1,4 +1,4 @@
-package com.chi.demo10.accounts.audit;
+package com.chi.audit;
 
 import java.util.Optional;
 

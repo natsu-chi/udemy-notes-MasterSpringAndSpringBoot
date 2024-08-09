@@ -1,6 +1,6 @@
-package com.chi.demo10.accounts.repository;
+package com.chi.repository;
 
-import com.chi.demo10.accounts.entity.Customer;
+import com.chi.entity.Customer;
 
 import java.util.Optional;
 

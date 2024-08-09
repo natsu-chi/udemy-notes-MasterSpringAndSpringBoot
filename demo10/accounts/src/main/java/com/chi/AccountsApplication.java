@@ -1,4 +1,4 @@
-package com.chi.demo10.accounts;
+package com.chi;
 
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;

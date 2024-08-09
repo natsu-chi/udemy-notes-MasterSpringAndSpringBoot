@@ -1,6 +1,6 @@
-package com.chi.demo10.accounts.controller;
+package com.chi.controller;
 
-import com.chi.demo10.accounts.service.IAccountsService;
+import com.chi.service.IAccountsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,9 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import com.chi.demo10.accounts.constants.AccountsConstants;
-import com.chi.demo10.accounts.dto.CustomerDto;
-import com.chi.demo10.accounts.dto.ResponseDto;
+import com.chi.constants.AccountsConstants;
+import com.chi.dto.CustomerDto;
+import com.chi.dto.ResponseDto;
 
 @Tag(
         name = "CRUD REST APIs for Accounts",

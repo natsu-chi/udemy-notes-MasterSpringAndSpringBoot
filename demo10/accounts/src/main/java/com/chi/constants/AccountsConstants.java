@@ -1,4 +1,4 @@
-package com.chi.demo10.accounts.constants;
+package com.chi.constants;
 
 public final class AccountsConstants {
     
