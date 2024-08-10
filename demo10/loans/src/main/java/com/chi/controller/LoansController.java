@@ -33,4 +33,34 @@ public class LoansController {
         LoansDto loansDto = iLoansService.fetchLoan(mobile);
         return ResponseEntity.status(HttpStatus.OK).body(loansDto);
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<ResponseDto> updateLoans(@RequestBody LoansDto loansDto) {
+        boolean isUpdated = iLoansService.updateLoan(loansDto);
+        if (isUpdated) {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new ResponseDto(LoansConstants.STATUS_200, LoansConstants.MESSAGE_200));
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.EXPECTATION_FAILED)
+                    .body(new ResponseDto(LoansConstants.STATUS_417, LoansConstants.MESSAGE_417_UPDATE));
+        }
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<ResponseDto> deleteLoans(@RequestParam
+                                                   @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile must be 10 digits")
+                                                   String mobile) {
+        boolean isDeleted = iLoansService.deleteLoan(mobile);
+        if(isDeleted) {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new ResponseDto(LoansConstants.STATUS_200, LoansConstants.MESSAGE_200));
+        }else{
+            return ResponseEntity
+                    .status(HttpStatus.EXPECTATION_FAILED)
+                    .body(new ResponseDto(LoansConstants.STATUS_417, LoansConstants.MESSAGE_417_DELETE));
+        }
+    }
 }
