@@ -4,6 +4,8 @@ import com.chi.constants.LoansConstants;
 import com.chi.dto.LoansDto;
 import com.chi.entity.Loans;
 import com.chi.exception.LoanAlreadyExistsException;
+import com.chi.exception.ResourceNotFoundException;
+import com.chi.mapper.LoansMapper;
 import com.chi.repository.LoansRepository;
 import com.chi.service.ILoansService;
 import lombok.AllArgsConstructor;
@@ -50,9 +52,17 @@ public class LoansServiceImpl implements ILoansService {
         return newLoan;
     }
 
+    /**
+     *
+     * @param mobile - Input mobile Number
+     * @return Loan Details based on a given mobileNumber
+     */
     @Override
     public LoansDto fetchLoan(String mobile) {
-        return null;
+        Loans loans = loansRepository.findByMobile(mobile).orElseThrow(
+                () -> new ResourceNotFoundException("Loan", "mobile", mobile)
+        );
+        return LoansMapper.mapToLoansDto(loans, new LoansDto());
     }
 
     @Override
