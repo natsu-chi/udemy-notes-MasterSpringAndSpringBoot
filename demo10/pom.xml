@@ -24,6 +24,7 @@
 	<modules>
 		<module>accounts</module>
 		<module>loans</module>
+		<module>cards</module>
 	</modules>
 	<scm>
 		<connection/>
@@ -32,7 +33,7 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>22</java.version>
+		<java.version>21</java.version>
 	</properties>
 
 	<build>
