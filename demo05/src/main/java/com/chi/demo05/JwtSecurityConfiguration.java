@@ -64,7 +64,8 @@ public class JwtSecurityConfiguration {
 
     @Bean
 	public UserDetailsService userDetailService(DataSource dataSource) {
-		
+
+        // ---------- ver 1: H2 & 手動建立
 		var user = User.withUsername("user01")
 			// .password("{noop}123")
 			.password("123")
@@ -84,6 +85,17 @@ public class JwtSecurityConfiguration {
 		jdbcUserDetailsManager.createUser(admin);
 
 		return jdbcUserDetailsManager;
+
+        // ---------- ver 2: JDBC
+        // return new JdbcUserDetailsManager(dataSource);
+
+        // ---------- ver 3: JPA (with example @Bean)
+        // @Bean
+        // public UserDetailsService userDetailsService() {
+        //     return email -> userRepository.findByEmail(email)
+        //                         .orElseThrow( () -> new UsernameNotFoundException("User not found with email: " + email));
+        // }
+
 	}
 
     @Bean
